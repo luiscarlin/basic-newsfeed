@@ -6,5 +6,5 @@ const Main = styled.main`
 `;
 
 export const App = () => {
-  return <Main>Hello world</Main>;
+  return <Main>Hello</Main>;
 };
