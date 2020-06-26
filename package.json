@@ -11,7 +11,7 @@
     "prebuild": "run-s clean",
     "build": "parcel build index.html",
     "lint:check": "eslint --ignore-path .gitignore .",
-    "lint:fix": "run-s lint:check -- --fix"
+    "lint:fix": "eslint --ignore-path .gitignore . --fix"
   },
   "husky": {
     "hooks": {
@@ -19,7 +19,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "npm-s lint:fix"
+    "*.{js,jsx,ts,tsx}": "yarn lint:fix"
   },
   "devDependencies": {
     "@types/react": "^16.9.41",
