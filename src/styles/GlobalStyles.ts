@@ -19,4 +19,8 @@ export default createGlobalStyle`
   *, *:before, *:after {
     box-sizing: inherit;
   }
+
+  *:focus {
+    outline: none;
+}
 `;

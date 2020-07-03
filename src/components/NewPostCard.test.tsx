@@ -10,11 +10,11 @@ describe('NewPostCard', () => {
   });
 
   it('renders an image of Nicholas Cage', () => {
-    expect(subject.find('img').prop('src')).toBe('https://www.placecage.com/50/50');
+    expect(subject.find('img').prop('src')).toBe('https://www.placecage.com/300/300');
   });
 
-  it('renders an input field with correct placeholder text', () => {
-    expect(subject.find('input').prop('placeholder')).toBe('What is on your mind?');
+  it('renders a textarea field with correct placeholder text', () => {
+    expect(subject.find('textarea').prop('placeholder')).toBe('What is on your mind?');
   });
 
   it('renders an a button to post Photo/Video', () => {
