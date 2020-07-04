@@ -95,6 +95,11 @@ export const NewPostCard = ({ onPost }: NewPostCardProps) => {
 
   const [text, setText] = useState('');
 
+  const onPostClicked = () => {
+    onPost(text);
+    setText('');
+  };
+
   return (
     <CardContainer>
       <TopContainer>
@@ -116,7 +121,7 @@ export const NewPostCard = ({ onPost }: NewPostCardProps) => {
           </IconContainer>
           Photo/Video
         </PhotoButton>
-        <PostItButton disabled={text === ''} onClick={() => onPost(text)}>
+        <PostItButton disabled={text === ''} onClick={onPostClicked}>
           Post It
         </PostItButton>
       </CtaBar>

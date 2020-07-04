@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { NewPostCard } from './NewPostCard';
@@ -46,5 +46,12 @@ describe('NewPostCard', () => {
     userEvent.click(screen.getByRole('button', { name: 'Post It' }));
 
     expect(onPost).not.toHaveBeenCalled();
+  });
+
+  it('clears input box after message was posted', () => {
+    userEvent.type(screen.getByRole('textbox'), 'my post');
+    userEvent.click(screen.getByRole('button', { name: 'Post It' }));
+
+    expect(within(screen.getByRole('textbox')).queryByText('my post')).toBeNull();
   });
 });
