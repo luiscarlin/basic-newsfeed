@@ -3,7 +3,7 @@ import { darken } from 'polished';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaPhotoVideo } from 'react-icons/fa';
 import styled from 'styled-components';
-import { CardContainer, ProfilePic } from '../styles/CardStyles';
+import { CardContainer } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
 
 const InputBox = styled.textarea`
@@ -19,6 +19,12 @@ const InputBox = styled.textarea`
   ::placeholder {
     color: ${colors.placeholderText};
   }
+`;
+
+const ProfilePic = styled.img`
+  width: 5rem;
+  border-radius: 50px;
+  margin: 2rem;
 `;
 
 const PhotoButton = styled.button`

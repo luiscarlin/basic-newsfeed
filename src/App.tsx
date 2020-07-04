@@ -6,7 +6,7 @@ import { colors } from './styles/colors';
 
 const Main = styled.main`
   background: ${colors.background};
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +21,7 @@ export const App = () => {
         name={'Carlos Carlone'}
         location="OH, USA"
         minutesAgo={3}
-        posttMessage={'this is my post'}
+        posttMessage={'Testing the new posts / comments'}
         numberLikes={5}
         numberComments={10}
       />
