@@ -20,6 +20,10 @@ describe('NewPostCard', () => {
     expect(screen.getByPlaceholderText('What is on your mind?')).toBeVisible();
   });
 
+  it('renders a focused input box', () => {
+    expect(screen.getByRole('textbox')).toHaveFocus();
+  });
+
   it('renders a post Photo/Video button', () => {
     expect(screen.getByRole('button', { name: 'Photo/Video' })).toBeVisible();
   });
