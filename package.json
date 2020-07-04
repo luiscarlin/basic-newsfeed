@@ -10,13 +10,14 @@
     "start": "parcel index.html --port 3000 --open",
     "prebuild": "run-s clean",
     "build": "parcel build index.html",
+    "tsc": "tsc",
     "lint:check": "eslint --ignore-path .gitignore .",
     "lint:fix": "eslint --ignore-path .gitignore . --fix",
     "test": "jest"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test --coverage && lint-staged"
+      "pre-commit": "yarn test --coverage && yarn tsc && lint-staged"
     }
   },
   "lint-staged": {

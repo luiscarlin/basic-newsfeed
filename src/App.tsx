@@ -16,7 +16,7 @@ const Main = styled.main`
 export const App = () => {
   return (
     <Main>
-      <NewPostCard />
+      <NewPostCard onPost={(message) => console.log(message)} />
       <Card />
     </Main>
   );
