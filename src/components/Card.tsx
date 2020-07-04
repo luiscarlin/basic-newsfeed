@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import React from 'react';
 import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import styled from 'styled-components';
@@ -94,6 +95,9 @@ const Button = styled.button`
   font-weight: 500;
   line-height: 1.5;
   padding: 0;
+  :hover {
+    color: ${darken(0.2, colors.secondaryText)};
+  }
 `;
 
 const LeftButton = styled(Button)`
