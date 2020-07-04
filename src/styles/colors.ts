@@ -1,10 +1,12 @@
 export const colors = {
   background: '#d9e1eb',
   cardBackground: '#ffffff',
-  primaryButtonBackground: '#88b0fd',
+  primaryDisabledButtonBackground: '#88b0fd',
+  primaryActiveButtonBackground: '#4486fa',
   secondaryButtonBackground: '#16181a',
   placeholderText: '#7288a3',
-  border: '#e6e6e6',
+  border: '#bdc3cc',
   actionBarBackground: '#f7f7f7',
   text: '#4e4f5c',
+  buttonText: '#ffffff',
 };

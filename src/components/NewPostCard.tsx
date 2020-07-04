@@ -1,7 +1,10 @@
 import autosize from 'autosize';
-import React, { useEffect, useRef } from 'react';
+import { darken } from 'polished';
+import React, { useEffect, useRef, useState } from 'react';
+import { FaPhotoVideo } from 'react-icons/fa';
 import styled from 'styled-components';
 import { CardContainer } from '../styles/CardStyles';
+import { colors } from '../styles/colors';
 
 export const ProfilePic = styled.img`
   width: 5rem;
@@ -12,37 +15,77 @@ export const ProfilePic = styled.img`
 const InputBox = styled.textarea`
   border: none;
   resize: none;
-  /* background: red; */
-  margin: 3.5rem 2rem 3.5rem 0;
+  margin: 3rem 2rem 3rem 0;
   min-height: 7rem;
   width: 100%;
-  background: red;
+  font-size: 1.7rem;
+  color: ${colors.text};
+  font-weight: 500;
+  line-height: 1.5;
+  ::placeholder {
+    color: ${colors.placeholderText};
+  }
 `;
 
-const PhotoButton = styled.button``;
+const PhotoButton = styled.button`
+  background: ${colors.secondaryButtonBackground};
+  border: none;
+  border-radius: 50px;
+  color: ${colors.buttonText};
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+`;
 
-const PostItButton = styled.button``;
+interface PostItButtonProps {
+  disabled: boolean;
+}
+const PostItButton = styled.button<PostItButtonProps>`
+  background: ${(props) =>
+    props.disabled ? colors.primaryDisabledButtonBackground : colors.primaryActiveButtonBackground};
+  border: none;
+  border-radius: 4px;
+  color: ${colors.buttonText};
+  font-weight: 600;
+  font-size: 1.6rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
+  :hover {
+    background: ${(props) =>
+      props.disabled ? colors.primaryDisabledButtonBackground : darken(0.1, colors.primaryActiveButtonBackground)};
+  }
+`;
 
 const TopContainer = styled.div`
-  /* background: blue; */
   width: 100%;
   display: flex;
 `;
 
 const PictureContainer = styled.div`
   position: relative;
-  /* background: black; */
 `;
 
 const CtaBar = styled.div`
   display: flex;
   justify-content: space-between;
   height: 7rem;
-  padding: 1.5rem;
-  background: black;
+  padding: 1.7rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-top: 1px solid ${colors.border};
 `;
 
-export const NewPostCard = () => {
+const IconContainer = styled.span`
+  margin-right: 0.5rem;
+`;
+
+interface NewPostCardProps {
+  onPost: (text: string) => void;
+}
+
+export const NewPostCard = ({ onPost }: NewPostCardProps) => {
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -50,17 +93,32 @@ export const NewPostCard = () => {
     autosize(textareaRef.current);
   }, []);
 
+  const [text, setText] = useState('');
+
   return (
     <CardContainer>
       <TopContainer>
         <PictureContainer>
           <ProfilePic src={'https://www.placecage.com/300/300'} alt="profile-pic" />
         </PictureContainer>
-        <InputBox ref={textareaRef} placeholder="What is on your mind?" />
+        <InputBox
+          role="textbox"
+          ref={textareaRef}
+          placeholder="What is on your mind?"
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+        />
       </TopContainer>
       <CtaBar>
-        <PhotoButton data-testid="post-photo-video">Photo/Video</PhotoButton>
-        <PostItButton data-testid="post-message">Post It</PostItButton>
+        <PhotoButton>
+          <IconContainer>
+            <FaPhotoVideo />
+          </IconContainer>
+          Photo/Video
+        </PhotoButton>
+        <PostItButton disabled={text === ''} onClick={() => onPost(text)}>
+          Post It
+        </PostItButton>
       </CtaBar>
     </CardContainer>
   );
