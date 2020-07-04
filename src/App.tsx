@@ -17,7 +17,14 @@ export const App = () => {
   return (
     <Main>
       <NewPostCard onPost={(message) => console.log(message)} />
-      <Card />
+      <Card
+        name={'Carlos Carlone'}
+        location="OH, USA"
+        minutesAgo={3}
+        posttMessage={'this is my post'}
+        numberLikes={5}
+        numberComments={10}
+      />
     </Main>
   );
 };

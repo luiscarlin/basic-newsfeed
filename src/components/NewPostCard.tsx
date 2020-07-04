@@ -3,14 +3,8 @@ import { darken } from 'polished';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaPhotoVideo } from 'react-icons/fa';
 import styled from 'styled-components';
-import { CardContainer } from '../styles/CardStyles';
+import { CardContainer, ProfilePic } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
-
-export const ProfilePic = styled.img`
-  width: 5rem;
-  border-radius: 50px;
-  margin: 2rem;
-`;
 
 const InputBox = styled.textarea`
   border: none;
@@ -63,10 +57,6 @@ const TopContainer = styled.div`
   display: flex;
 `;
 
-const PictureContainer = styled.div`
-  position: relative;
-`;
-
 const CtaBar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -103,9 +93,9 @@ export const NewPostCard = ({ onPost }: NewPostCardProps) => {
   return (
     <CardContainer>
       <TopContainer>
-        <PictureContainer>
+        <div>
           <ProfilePic src={'https://www.placecage.com/300/300'} alt="profile-pic" />
-        </PictureContainer>
+        </div>
         <InputBox
           role="textbox"
           ref={textareaRef}
