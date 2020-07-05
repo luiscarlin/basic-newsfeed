@@ -109,12 +109,12 @@ const ButtonIcon = styled.span`
   margin-right: 0.5rem;
 `;
 
-interface CardProps {
+export interface CardProps {
   photoUrl: string;
   name: string;
   location: string;
   minutesAgo: number;
-  posttMessage: string;
+  postMessage: string;
   numberLikes: number;
   numberComments: number;
   comments: CommentProps[];
@@ -125,7 +125,7 @@ export const Card = ({
   name,
   location,
   minutesAgo,
-  posttMessage,
+  postMessage,
   numberLikes,
   numberComments,
   comments,
@@ -155,7 +155,7 @@ export const Card = ({
         </div>
       </CardHeader>
       <CardBody>
-        <PostMessage>{posttMessage}</PostMessage>
+        <PostMessage>{postMessage}</PostMessage>
         <PostStatus>
           <span>{`${numberLikes} Likes`}</span>
           <CircleIcon>

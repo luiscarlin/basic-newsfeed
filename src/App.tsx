@@ -23,7 +23,7 @@ export const App = () => {
         name={'Carlos Carlone'}
         location="OH, USA"
         minutesAgo={3}
-        posttMessage={'Testing the new posts / comments'}
+        postMessage={'Testing the new posts / comments'}
         numberLikes={5}
         numberComments={10}
         comments={[]}
@@ -33,7 +33,7 @@ export const App = () => {
         name={'Carlos Carlone'}
         location="OH, USA"
         minutesAgo={3}
-        posttMessage={'Testing the new posts / comments'}
+        postMessage={'Testing the new posts / comments'}
         numberLikes={5}
         numberComments={10}
         comments={[
