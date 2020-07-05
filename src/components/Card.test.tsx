@@ -1,10 +1,12 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, within } from '@testing-library/react';
 import React from 'react';
 import { Card } from './Card';
+
 describe('Card', () => {
   beforeEach(() => {
     render(
       <Card
+        photoUrl={'https://fake.pic'}
         name={'Carlos Carlone'}
         location="OH, USA"
         minutesAgo={3}
@@ -15,8 +17,8 @@ describe('Card', () => {
     );
   });
 
-  it('renders an image of Nicholas Cage', () => {
-    expect(screen.getByRole('img')).toHaveAttribute('src', 'https://www.placecage.com/300/300');
+  it('renders an image with the provided url', () => {
+    expect(screen.getByTestId('card-profile-pic')).toHaveAttribute('src', 'https://fake.pic');
   });
 
   it('renders user name', () => {
@@ -28,13 +30,14 @@ describe('Card', () => {
   });
 
   it('renders time elapsed since post was made in minutes - plural', () => {
-    expect(screen.getByText('3 minutes ago')).toBeVisible();
+    expect(within(screen.getByTestId('card-elapsed-time')).getByText('3 minutes ago')).toBeVisible();
   });
 
   it('renders time elapsed since post was made in minutes - singular', () => {
     cleanup();
     render(
       <Card
+        photoUrl={'https://fake.pic'}
         name={'Carlos Carlone'}
         location="OH, USA"
         minutesAgo={1}
@@ -64,7 +67,7 @@ describe('Card', () => {
   });
 
   it('renders a Like button', () => {
-    expect(screen.getByRole('button', { name: 'Like' })).toBeVisible();
+    expect(within(screen.getByTestId('card-like-button')).getByText('Like')).toBeVisible();
   });
 
   it('renders Comment button', () => {

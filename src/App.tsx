@@ -18,6 +18,7 @@ export const App = () => {
     <Main>
       <NewPostCard onPost={(message) => console.log(message)} />
       <Card
+        photoUrl={'https://www.placecage.com/300/300'}
         name={'Carlos Carlone'}
         location="OH, USA"
         minutesAgo={3}

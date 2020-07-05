@@ -4,6 +4,7 @@ import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'r
 import styled from 'styled-components';
 import { CardContainer } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
+import { Comment } from './Comment';
 
 const CardHeader = styled.div`
   display: flex;
@@ -109,6 +110,7 @@ const ButtonIcon = styled.span`
 `;
 
 interface CardProps {
+  photoUrl: string;
   name: string;
   location: string;
   minutesAgo: number;
@@ -117,12 +119,20 @@ interface CardProps {
   numberComments: number;
 }
 
-export const Card = ({ name, location, minutesAgo, posttMessage, numberLikes, numberComments }: CardProps) => {
+export const Card = ({
+  photoUrl,
+  name,
+  location,
+  minutesAgo,
+  posttMessage,
+  numberLikes,
+  numberComments,
+}: CardProps) => {
   return (
     <CardContainer>
       <CardHeader>
         <UserInfoContainer>
-          <ProfilePic src={'https://www.placecage.com/300/300'} alt="profile-pic" />
+          <ProfilePic data-testid={'card-profile-pic'} src={photoUrl} alt="profile-pic" />
           <div>
             <Name>{name}</Name>
             <Location>
@@ -131,7 +141,9 @@ export const Card = ({ name, location, minutesAgo, posttMessage, numberLikes, nu
               </Icon>
               {location}
             </Location>
-            <ElapsedTime>{`${minutesAgo} ${minutesAgo === 1 ? 'minute' : 'minutes'} ago`}</ElapsedTime>
+            <ElapsedTime data-testid={'card-elapsed-time'}>{`${minutesAgo} ${
+              minutesAgo === 1 ? 'minute' : 'minutes'
+            } ago`}</ElapsedTime>
           </div>
         </UserInfoContainer>
         <div data-testid="card-ellipsis-icon">
@@ -151,7 +163,7 @@ export const Card = ({ name, location, minutesAgo, posttMessage, numberLikes, nu
         </PostStatus>
       </CardBody>
       <CtaBar>
-        <LeftButton>
+        <LeftButton data-testid={'card-like-button'}>
           <ButtonIcon>
             <FaHeart />
           </ButtonIcon>
@@ -164,6 +176,14 @@ export const Card = ({ name, location, minutesAgo, posttMessage, numberLikes, nu
           Comment
         </Button>
       </CtaBar>
+      <Comment
+        photoUrl={'https://www.placecage.com/300/300'}
+        minutesAgo={3}
+        name={'Jose Josefino'}
+        role={'Software Developer'}
+        message={'this is a comment'}
+        numberLikes={4}
+      />
     </CardContainer>
   );
 };
