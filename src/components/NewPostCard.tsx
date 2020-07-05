@@ -77,10 +77,15 @@ const IconContainer = styled.span`
   margin-right: 0.5rem;
 `;
 
-interface NewPostCardProps {
+export interface NewPostCardStateProps {
   photoUrl: string;
+}
+
+export interface NewPostCardDispatchProps {
   onPost: (text: string) => void;
 }
+
+export type NewPostCardProps = NewPostCardStateProps & NewPostCardDispatchProps;
 
 export const NewPostCard = ({ onPost, photoUrl }: NewPostCardProps) => {
   const textareaRef = useRef(null);

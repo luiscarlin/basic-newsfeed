@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Card } from './components/Card';
 import { CommentProps } from './components/Comment';
-import { NewPostCard } from './components/NewPostCard';
+import { NewPostCardContainer } from './containers/NewPostCard.container';
 import { colors } from './styles/colors';
 
 const Main = styled.main`
@@ -17,7 +17,7 @@ const Main = styled.main`
 export const App = () => {
   return (
     <Main>
-      <NewPostCard photoUrl={'https://www.placecage.com/100/100'} onPost={(message) => console.log(message)} />
+      <NewPostCardContainer />
       <Card
         photoUrl={'https://www.placecage.com/300/300'}
         name={'Carlos Carlone'}
