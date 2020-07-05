@@ -78,10 +78,11 @@ const IconContainer = styled.span`
 `;
 
 interface NewPostCardProps {
+  photoUrl: string;
   onPost: (text: string) => void;
 }
 
-export const NewPostCard = ({ onPost }: NewPostCardProps) => {
+export const NewPostCard = ({ onPost, photoUrl }: NewPostCardProps) => {
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -100,7 +101,7 @@ export const NewPostCard = ({ onPost }: NewPostCardProps) => {
     <CardContainer>
       <TopContainer>
         <div>
-          <ProfilePic src={'https://www.placecage.com/300/300'} alt="profile-pic" />
+          <ProfilePic src={photoUrl} alt="profile-pic" />
         </div>
         <InputBox
           role="textbox"

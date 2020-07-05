@@ -9,10 +9,10 @@ describe('NewPostCard', () => {
   beforeEach(() => {
     onPost = jest.fn();
 
-    render(<NewPostCard onPost={onPost} />);
+    render(<NewPostCard photoUrl="https://www.placecage.com/300/300" onPost={onPost} />);
   });
 
-  it('renders an image of Nicholas Cage', () => {
+  it('renders an image from the provided url', () => {
     expect(screen.getByRole('img')).toHaveAttribute('src', 'https://www.placecage.com/300/300');
   });
 

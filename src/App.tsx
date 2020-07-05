@@ -17,7 +17,7 @@ const Main = styled.main`
 export const App = () => {
   return (
     <Main>
-      <NewPostCard onPost={(message) => console.log(message)} />
+      <NewPostCard photoUrl={'https://www.placecage.com/100/100'} onPost={(message) => console.log(message)} />
       <Card
         photoUrl={'https://www.placecage.com/300/300'}
         name={'Carlos Carlone'}
@@ -38,7 +38,7 @@ export const App = () => {
         numberComments={10}
         comments={[
           {
-            photoUrl: 'https://www.placecage.com/400/400',
+            photoUrl: 'https://www.placecage.com/100/100',
             minutesAgo: 4,
             name: 'Jose Josefino',
             role: 'Software Developer',
