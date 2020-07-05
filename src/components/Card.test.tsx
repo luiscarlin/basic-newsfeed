@@ -1,6 +1,7 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import React from 'react';
 import { Card } from './Card';
+import { CommentProps } from './Comment';
 
 describe('Card', () => {
   beforeEach(() => {
@@ -13,6 +14,16 @@ describe('Card', () => {
         posttMessage={'this is my post'}
         numberLikes={5}
         numberComments={10}
+        comments={[
+          {
+            photoUrl: 'https://comment.pic',
+            minutesAgo: 4,
+            name: 'Jose Josefino',
+            role: 'Software Developer',
+            message: 'some comment',
+            numberLikes: 2,
+          } as CommentProps,
+        ]}
       />,
     );
   });
@@ -43,7 +54,8 @@ describe('Card', () => {
         minutesAgo={1}
         posttMessage={'this is my post'}
         numberLikes={2}
-        numberComments={10}
+        numberComments={0}
+        comments={[]}
       />,
     );
 
@@ -72,5 +84,9 @@ describe('Card', () => {
 
   it('renders Comment button', () => {
     expect(screen.getByRole('button', { name: 'Comment' })).toBeVisible();
+  });
+
+  it('rerders card comments', () => {
+    expect(screen.getAllByTestId('comment').length).toEqual(1);
   });
 });

@@ -4,7 +4,7 @@ import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'r
 import styled from 'styled-components';
 import { CardContainer } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
-import { Comment } from './Comment';
+import { Comment, CommentProps } from './Comment';
 
 const CardHeader = styled.div`
   display: flex;
@@ -117,6 +117,7 @@ interface CardProps {
   posttMessage: string;
   numberLikes: number;
   numberComments: number;
+  comments: CommentProps[];
 }
 
 export const Card = ({
@@ -127,6 +128,7 @@ export const Card = ({
   posttMessage,
   numberLikes,
   numberComments,
+  comments,
 }: CardProps) => {
   return (
     <CardContainer>
@@ -176,14 +178,9 @@ export const Card = ({
           Comment
         </Button>
       </CtaBar>
-      <Comment
-        photoUrl={'https://www.placecage.com/300/300'}
-        minutesAgo={3}
-        name={'Jose Josefino'}
-        role={'Software Developer'}
-        message={'this is a comment'}
-        numberLikes={4}
-      />
+      {comments.map((comment, index) => (
+        <Comment key={index} {...comment} />
+      ))}
     </CardContainer>
   );
 };

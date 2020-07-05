@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/colors';
 
-interface CommentProps {
+export interface CommentProps {
   photoUrl: string;
   minutesAgo: number;
   name: string;
@@ -33,7 +33,7 @@ const Content = styled.div`
 
 export const Comment = ({ photoUrl, minutesAgo, name, role, message, numberLikes }: CommentProps) => {
   return (
-    <CommentContainer>
+    <CommentContainer data-testid="comment">
       <ProfilePic src={photoUrl} alt="profile-pic" />
       <Content>
         <div>
