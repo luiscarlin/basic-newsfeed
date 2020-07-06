@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { LIKE_COMMENT } from '../actions/comment.action';
+import { DELETE_COMMENT, EDIT_COMMENT, LIKE_COMMENT } from '../actions/comment.action';
 import { ADD_POST_LIKE, CREATE_NEW_POST } from '../actions/posts.action';
 import { Post } from '../models/post.model';
 import { AppState, DEFAULT_APP_STATE } from '../store/AppState';
@@ -44,25 +44,50 @@ export const rootReducer: (state: AppState | undefined, action: any) => AppState
         posts,
       };
     case LIKE_COMMENT:
-      const { postId, commentId } = action.payload;
-
-      const posts = state.posts.map((post) => {
-        if (post.id !== postId) {
-          return post;
-        }
-        post.comments = post.comments.map((comment) => {
-          if (comment.id !== commentId) {
-            return comment;
-          }
-          comment.numberLikes += 1;
-          return comment;
-        });
-        return post;
-      });
-
       return {
         ...state,
-        posts,
+        posts: state.posts.map((post) => {
+          if (post.id !== action.payload.postId) {
+            return post;
+          }
+          post.comments = post.comments.map((comment) => {
+            if (comment.id !== action.payload.commentId) {
+              return comment;
+            }
+            comment.numberLikes += 1;
+            return comment;
+          });
+          return post;
+        }),
+      };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id !== action.payload.postId) {
+            return post;
+          }
+          post.numberComments -= 1;
+          post.comments = post.comments.filter((comment) => comment.id !== action.payload.commentId);
+          return post;
+        }),
+      };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id !== action.payload.postId) {
+            return post;
+          }
+          post.comments = post.comments.map((comment) => {
+            if (comment.id !== action.payload.commentId) {
+              return comment;
+            }
+            comment.message = action.payload.comment;
+            return comment;
+          });
+          return post;
+        }),
       };
     default:
       return state;

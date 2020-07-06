@@ -124,6 +124,8 @@ export interface CardStateProps {
 export interface CardDispatchProps {
   onPostLike: () => void;
   onCommentLike: (commentId: string) => void;
+  onCommentDelete: (commentId: string) => void;
+  onCommentEdit: (commentId: string, comment: string) => void;
 }
 
 export type CardProps = CardStateProps & CardDispatchProps;
@@ -139,6 +141,8 @@ export const Card = ({
   comments,
   onPostLike,
   onCommentLike,
+  onCommentDelete,
+  onCommentEdit,
 }: CardProps) => {
   return (
     <CardContainer>
@@ -189,7 +193,13 @@ export const Card = ({
         </Button>
       </CtaBar>
       {comments.map((comment, index) => (
-        <Comment key={index} {...comment} onLike={() => onCommentLike(comment.id)} />
+        <Comment
+          key={index}
+          {...comment}
+          onLike={() => onCommentLike(comment.id)}
+          onDelete={() => onCommentDelete(comment.id)}
+          editComment={(text) => onCommentEdit(comment.id, text)}
+        />
       ))}
     </CardContainer>
   );

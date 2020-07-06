@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CommentModel } from '../models/comment.model';
 import { colors } from '../styles/colors';
@@ -14,6 +14,8 @@ import { colors } from '../styles/colors';
 
 export interface CommentDispatchProps {
   onLike: () => void;
+  onDelete: () => void;
+  editComment: (comment: string) => void;
 }
 
 export type CommentProps = CommentModel & CommentDispatchProps;
@@ -38,7 +40,27 @@ const Content = styled.div`
   display: flex;
 `;
 
-export const Comment = ({ photoUrl, minutesAgo, name, role, message, numberLikes, onLike }: CommentProps) => {
+export const Comment = ({
+  photoUrl,
+  minutesAgo,
+  name,
+  role,
+  message,
+  numberLikes,
+  onLike,
+  onDelete,
+  editComment,
+}: CommentProps) => {
+  const [disabled, setDisabled] = useState(true);
+  const [comment, setComment] = useState(message);
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      setDisabled(true);
+      editComment(comment);
+    }
+  };
+
   return (
     <CommentContainer data-testid="comment">
       <ProfilePic src={photoUrl} alt="profile-pic" />
@@ -46,12 +68,16 @@ export const Comment = ({ photoUrl, minutesAgo, name, role, message, numberLikes
         <div>
           <div>{name}</div>
           <div>{role}</div>
-          <div>{message}</div>
+          {disabled ? (
+            <div>{comment}</div>
+          ) : (
+            <input value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
+          )}
           <div>
             <span>{numberLikes} Likes</span>
             <button onClick={onLike}>Like</button>
-            <button>Edit</button>
-            <button>Delete</button>
+            <button onClick={() => setDisabled(false)}>Edit</button>
+            <button onClick={onDelete}>Delete</button>
           </div>
         </div>
         <div>{`${minutesAgo} minutes ago`}</div>
