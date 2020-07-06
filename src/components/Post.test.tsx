@@ -1,12 +1,12 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import React from 'react';
-import { Card } from './Card';
 import { CommentStateProps } from './Comment';
+import { Post } from './Post';
 
 describe('Card', () => {
   beforeEach(() => {
     render(
-      <Card
+      <Post
         photoUrl={'https://fake.pic'}
         name={'Carlos Carlone'}
         location="OH, USA"
@@ -47,7 +47,7 @@ describe('Card', () => {
   it('renders time elapsed since post was made in minutes - singular', () => {
     cleanup();
     render(
-      <Card
+      <Post
         photoUrl={'https://fake.pic'}
         name={'Carlos Carlone'}
         location="OH, USA"

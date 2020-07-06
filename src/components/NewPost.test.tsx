@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { NewPostCard } from './NewPostCard';
+import { NewPost } from './NewPost';
 
 describe('NewPostCard', () => {
   let onPost;
@@ -9,7 +9,7 @@ describe('NewPostCard', () => {
   beforeEach(() => {
     onPost = jest.fn();
 
-    render(<NewPostCard photoUrl="https://www.placecage.com/300/300" onPost={onPost} />);
+    render(<NewPost photoUrl="https://www.placecage.com/300/300" onPost={onPost} />);
   });
 
   it('renders an image from the provided url', () => {

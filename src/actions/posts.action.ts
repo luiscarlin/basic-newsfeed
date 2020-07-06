@@ -1,34 +1,34 @@
 import { Action } from 'redux';
 import { User } from '../models/user.model';
 
-export const CREATE_NEW_POST = 'POST@CREATE_NEW_POST';
-export const ADD_POST_LIKE = 'POST@ADD_LIKE';
+export const ADD_POST = 'POST@ADD';
+export const LIKE_POST = 'POST@LIKE';
 
-interface AddNewPostAction extends Action {
-  type: typeof CREATE_NEW_POST;
+interface AddPostAction extends Action {
+  type: typeof ADD_POST;
   payload: {
     text: string;
     user: User;
   };
 }
 
-interface AddPostLIkeAction extends Action {
-  type: typeof ADD_POST_LIKE;
+interface LikePostAction extends Action {
+  type: typeof LIKE_POST;
   payload: {
     id: string;
   };
 }
 
-export const addNewPost = (user: User, text: string): AddNewPostAction => {
+export const addPost = (user: User, text: string): AddPostAction => {
   return {
-    type: CREATE_NEW_POST,
+    type: ADD_POST,
     payload: { user, text },
   };
 };
 
-export const addPostLike = (id: string): AddPostLIkeAction => {
+export const likePost = (id: string): LikePostAction => {
   return {
-    type: ADD_POST_LIKE,
+    type: LIKE_POST,
     payload: { id },
   };
 };
