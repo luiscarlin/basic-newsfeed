@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { CommentModel } from '../models/comment.model';
+import { SmallProfilePic } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
 
 export interface CommentDispatchProps {
@@ -11,7 +12,7 @@ export interface CommentDispatchProps {
 
 export type CommentProps = CommentModel & CommentDispatchProps;
 
-const CommentContainer = styled.div`
+const CommentWrapper = styled.div`
   display: flex;
   align-items: center;
   background: ${colors.actionBarBackground};
@@ -60,8 +61,8 @@ export const Comment = ({
   };
 
   return (
-    <CommentContainer data-testid="comment">
-      <ProfilePic src={photoUrl} alt="profile-pic" />
+    <CommentWrapper data-testid="comment">
+      <SmallProfilePic src={photoUrl} alt="profile-pic" />
       <Content>
         <div>
           <div>{name}</div>
@@ -80,6 +81,6 @@ export const Comment = ({
         </div>
         <div>{`${minutesAgo} minutes ago`}</div>
       </Content>
-    </CommentContainer>
+    </CommentWrapper>
   );
 };

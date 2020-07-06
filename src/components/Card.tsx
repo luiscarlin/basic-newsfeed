@@ -4,7 +4,7 @@ import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'r
 import styled from 'styled-components';
 import { NewCommentContainer } from '../containers/NewComment.container';
 import { CommentModel } from '../models/comment.model';
-import { CardContainer } from '../styles/CardStyles';
+import { CardWrapper } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
 import { Comment } from './Comment';
 
@@ -21,7 +21,7 @@ const ProfilePic = styled.img`
   margin-right: 2rem;
 `;
 
-const UserInfoContainer = styled.div`
+const UserInfoWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -154,9 +154,9 @@ export const Card = ({
   }, [id]);
 
   return (
-    <CardContainer>
+    <CardWrapper>
       <CardHeader>
-        <UserInfoContainer>
+        <UserInfoWrapper>
           <ProfilePic data-testid={'card-profile-pic'} src={photoUrl} alt="profile-pic" />
           <div>
             <Name>{name}</Name>
@@ -170,7 +170,7 @@ export const Card = ({
               minutesAgo === 1 ? 'minute' : 'minutes'
             } ago`}</ElapsedTime>
           </div>
-        </UserInfoContainer>
+        </UserInfoWrapper>
         <div data-testid="card-ellipsis-icon">
           <EllipsisIcon>
             <FaEllipsisH />
@@ -211,6 +211,6 @@ export const Card = ({
           editComment={(text) => onCommentEdit(comment.id, text)}
         />
       ))}
-    </CardContainer>
+    </CardWrapper>
   );
 };

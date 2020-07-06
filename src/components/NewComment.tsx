@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { SmallProfilePic } from '../styles/CardStyles';
 
-const ProfilePic = styled.img`
-  width: 4rem;
-  border-radius: 50px;
+const ProfilePic = styled(SmallProfilePic)`
   margin: 2rem;
 `;
 
