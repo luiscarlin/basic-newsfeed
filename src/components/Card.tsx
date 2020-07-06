@@ -1,7 +1,8 @@
 import { darken } from 'polished';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import styled from 'styled-components';
+import { NewCommentContainer } from '../containers/NewComment.container';
 import { CommentModel } from '../models/comment.model';
 import { CardContainer } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
@@ -111,6 +112,7 @@ const ButtonIcon = styled.span`
 `;
 
 export interface CardStateProps {
+  id: string;
   photoUrl: string;
   name: string;
   location: string;
@@ -131,6 +133,7 @@ export interface CardDispatchProps {
 export type CardProps = CardStateProps & CardDispatchProps;
 
 export const Card = ({
+  id,
   photoUrl,
   name,
   location,
@@ -144,6 +147,8 @@ export const Card = ({
   onCommentDelete,
   onCommentEdit,
 }: CardProps) => {
+  const [displayNewComment, setDisplayNewComment] = useState(false);
+
   return (
     <CardContainer>
       <CardHeader>
@@ -185,13 +190,14 @@ export const Card = ({
           </ButtonIcon>
           Like
         </LeftButton>
-        <Button>
+        <Button onClick={() => setDisplayNewComment(!displayNewComment)}>
           <ButtonIcon>
             <FaCommentDots />
           </ButtonIcon>
           Comment
         </Button>
       </CtaBar>
+      {displayNewComment && <NewCommentContainer postId={id} onCommentEntered={() => setDisplayNewComment(false)} />}
       {comments.map((comment, index) => (
         <Comment
           key={index}

@@ -1,8 +1,19 @@
 import { Action } from 'redux';
+import { User } from '../models/user.model';
 
+export const ADD_COMMENT = 'COMMENT@ADD';
 export const LIKE_COMMENT = 'COMMENT@LIKE';
 export const DELETE_COMMENT = 'COMMENT@DELETE';
 export const EDIT_COMMENT = 'COMMENT@EDIT';
+
+interface AddCommentAction extends Action {
+  type: typeof ADD_COMMENT;
+  payload: {
+    user: User;
+    postId: string;
+    comment: string;
+  };
+}
 
 interface LikeCommentAction extends Action {
   type: typeof LIKE_COMMENT;
@@ -28,6 +39,13 @@ interface EditCommentAction extends Action {
     comment: string;
   };
 }
+
+export const addComment = (user: User, postId: string, comment: string): AddCommentAction => {
+  return {
+    type: ADD_COMMENT,
+    payload: { user, postId, comment },
+  };
+};
 
 export const likeComment = (postId: string, commentId: string): LikeCommentAction => {
   return {
