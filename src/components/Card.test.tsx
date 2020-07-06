@@ -1,7 +1,7 @@
 import { cleanup, render, screen, within } from '@testing-library/react';
 import React from 'react';
 import { Card } from './Card';
-import { CommentProps } from './Comment';
+import { CommentStateProps } from './Comment';
 
 describe('Card', () => {
   beforeEach(() => {
@@ -22,7 +22,7 @@ describe('Card', () => {
             role: 'Software Developer',
             message: 'some comment',
             numberLikes: 2,
-          } as CommentProps,
+          } as CommentStateProps,
         ]}
       />,
     );

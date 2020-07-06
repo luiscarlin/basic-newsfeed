@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
-import { CREATE_NEW_POST } from '../actions/posts.action';
+import { LIKE_COMMENT } from '../actions/comment.action';
+import { ADD_POST_LIKE, CREATE_NEW_POST } from '../actions/posts.action';
 import { Post } from '../models/post.model';
 import { AppState, DEFAULT_APP_STATE } from '../store/AppState';
 
@@ -26,6 +27,42 @@ export const rootReducer: (state: AppState | undefined, action: any) => AppState
             comments: [],
           } as Post,
         ],
+      };
+    case ADD_POST_LIKE:
+      const { id } = action.payload;
+
+      const posts = state.posts.map((post) => {
+        if (post.id !== id) {
+          return post;
+        }
+        post.numberLikes += 1;
+        return post;
+      });
+
+      return {
+        ...state,
+        posts,
+      };
+    case LIKE_COMMENT:
+      const { postId, commentId } = action.payload;
+
+      const posts = state.posts.map((post) => {
+        if (post.id !== postId) {
+          return post;
+        }
+        post.comments = post.comments.map((comment) => {
+          if (comment.id !== commentId) {
+            return comment;
+          }
+          comment.numberLikes += 1;
+          return comment;
+        });
+        return post;
+      });
+
+      return {
+        ...state,
+        posts,
       };
     default:
       return state;

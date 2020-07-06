@@ -2,9 +2,10 @@ import { darken } from 'polished';
 import React from 'react';
 import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import styled from 'styled-components';
+import { CommentModel } from '../models/comment.model';
 import { CardContainer } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
-import { Comment, CommentProps } from './Comment';
+import { Comment } from './Comment';
 
 const CardHeader = styled.div`
   display: flex;
@@ -109,7 +110,7 @@ const ButtonIcon = styled.span`
   margin-right: 0.5rem;
 `;
 
-export interface CardProps {
+export interface CardStateProps {
   photoUrl: string;
   name: string;
   location: string;
@@ -117,8 +118,15 @@ export interface CardProps {
   postMessage: string;
   numberLikes: number;
   numberComments: number;
-  comments: CommentProps[];
+  comments: CommentModel[];
 }
+
+export interface CardDispatchProps {
+  onPostLike: () => void;
+  onCommentLike: (commentId: string) => void;
+}
+
+export type CardProps = CardStateProps & CardDispatchProps;
 
 export const Card = ({
   photoUrl,
@@ -129,6 +137,8 @@ export const Card = ({
   numberLikes,
   numberComments,
   comments,
+  onPostLike,
+  onCommentLike,
 }: CardProps) => {
   return (
     <CardContainer>
@@ -165,7 +175,7 @@ export const Card = ({
         </PostStatus>
       </CardBody>
       <CtaBar>
-        <LeftButton data-testid={'card-like-button'}>
+        <LeftButton data-testid={'card-like-button'} onClick={onPostLike}>
           <ButtonIcon>
             <FaHeart />
           </ButtonIcon>
@@ -179,7 +189,7 @@ export const Card = ({
         </Button>
       </CtaBar>
       {comments.map((comment, index) => (
-        <Comment key={index} {...comment} />
+        <Comment key={index} {...comment} onLike={() => onCommentLike(comment.id)} />
       ))}
     </CardContainer>
   );

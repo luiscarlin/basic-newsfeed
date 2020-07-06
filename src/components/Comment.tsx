@@ -1,15 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { CommentModel } from '../models/comment.model';
 import { colors } from '../styles/colors';
 
-export interface CommentProps {
-  photoUrl: string;
-  minutesAgo: number;
-  name: string;
-  role: string;
-  message: string;
-  numberLikes: number;
+// export interface CommentStateProps {
+//   photoUrl: string;
+//   minutesAgo: number;
+//   name: string;
+//   role: string;
+//   message: string;
+//   numberLikes: number;
+// }
+
+export interface CommentDispatchProps {
+  onLike: () => void;
 }
+
+export type CommentProps = CommentModel & CommentDispatchProps;
 
 const CommentContainer = styled.div`
   display: flex;
@@ -31,7 +38,7 @@ const Content = styled.div`
   display: flex;
 `;
 
-export const Comment = ({ photoUrl, minutesAgo, name, role, message, numberLikes }: CommentProps) => {
+export const Comment = ({ photoUrl, minutesAgo, name, role, message, numberLikes, onLike }: CommentProps) => {
   return (
     <CommentContainer data-testid="comment">
       <ProfilePic src={photoUrl} alt="profile-pic" />
@@ -42,7 +49,7 @@ export const Comment = ({ photoUrl, minutesAgo, name, role, message, numberLikes
           <div>{message}</div>
           <div>
             <span>{numberLikes} Likes</span>
-            <button>Like</button>
+            <button onClick={onLike}>Like</button>
             <button>Edit</button>
             <button>Delete</button>
           </div>
