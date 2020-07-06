@@ -40,7 +40,7 @@ export interface NewCommentDispatchProps {
 
 export type NewCommentProps = NewCommentStateProps & NewCommentDispatchProps;
 
-export const NewComment = ({ photoUrl, onNewComment }: NewCommentProps) => {
+export const NewComment = ({ photoUrl, onNewComment }: NewCommentProps): JSX.Element => {
   const [comment, setComment] = useState('');
 
   const handleKeyDown = (event) => {

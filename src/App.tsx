@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FeedContainer } from './containers/Feed.container';
-import { NewPostCardContainer } from './containers/NewPostCard.container';
+import { NewPostContainer } from './containers/NewPost.container';
 import { colors } from './styles/colors';
 
 const Main = styled.main`
@@ -17,10 +17,10 @@ const Main = styled.main`
   }
 `;
 
-export const App = () => {
+export const App = (): JSX.Element => {
   return (
     <Main>
-      <NewPostCardContainer />
+      <NewPostContainer />
       <FeedContainer />
     </Main>
   );

@@ -75,17 +75,17 @@ const IconWrapper = styled.span`
   margin-right: 0.5rem;
 `;
 
-export interface NewPostCardStateProps {
+export interface NewPostStateProps {
   photoUrl: string;
 }
 
-export interface NewPostCardDispatchProps {
+export interface NewPostDispatchProps {
   onPost: (text: string) => void;
 }
 
-export type NewPostCardProps = NewPostCardStateProps & NewPostCardDispatchProps;
+export type NewPostdProps = NewPostStateProps & NewPostDispatchProps;
 
-export const NewPostCard = ({ onPost, photoUrl }: NewPostCardProps) => {
+export const NewPost = ({ onPost, photoUrl }: NewPostdProps): JSX.Element => {
   const textareaRef = useRef(null);
 
   useEffect(() => {

@@ -1,47 +1,42 @@
+import { AnyAction } from 'redux';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_COMMENT, DELETE_COMMENT, EDIT_COMMENT, LIKE_COMMENT } from '../actions/comment.action';
-import { ADD_POST_LIKE, CREATE_NEW_POST } from '../actions/posts.action';
-import { Post } from '../models/post.model';
+import { ADD_POST, LIKE_POST } from '../actions/posts.action';
 import { AppState, DEFAULT_APP_STATE } from '../store/AppState';
 
-export const rootReducer: (state: AppState | undefined, action: any) => AppState = (
+export const rootReducer: (state: AppState | undefined, action: AnyAction) => AppState = (
   state: AppState = DEFAULT_APP_STATE,
-  action: any,
+  action: AnyAction,
 ) => {
   switch (action.type) {
-    case CREATE_NEW_POST:
-      const { photoUrl, name, location } = action.payload.user;
+    case ADD_POST:
       return {
         ...state,
         posts: [
           {
             id: uuidv4(),
-            photoUrl,
-            name,
-            location,
+            photoUrl: action.payload.user.photoUrl,
+            name: action.payload.user.name,
+            location: action.payload.user.location,
             minutesAgo: 1,
             postMessage: action.payload.text,
             numberLikes: 0,
             numberComments: 0,
             comments: [],
-          } as Post,
+          },
           ...state.posts,
         ],
       };
-    case ADD_POST_LIKE:
-      const { id } = action.payload;
-
-      const posts = state.posts.map((post) => {
-        if (post.id !== id) {
-          return post;
-        }
-        post.numberLikes += 1;
-        return post;
-      });
-
+    case LIKE_POST:
       return {
         ...state,
-        posts,
+        posts: state.posts.map((post) => {
+          if (post.id !== action.payload.id) {
+            return post;
+          }
+          post.numberLikes += 1;
+          return post;
+        }),
       };
     case ADD_COMMENT:
       return {

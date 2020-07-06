@@ -1,16 +1,16 @@
 import React from 'react';
-import { CardContainer } from '../containers/Card.container';
+import { PostContainer } from '../containers/Post.container';
 import { Post } from '../models/post.model';
 
 export interface FeedProps {
   posts: Post[];
 }
 
-export const Feed = ({ posts }: FeedProps) => {
+export const Feed = ({ posts }: FeedProps): JSX.Element => {
   return (
     <>
       {posts.map((post, index) => (
-        <CardContainer key={index} id={post.id} />
+        <PostContainer key={index} id={post.id} />
       ))}
     </>
   );

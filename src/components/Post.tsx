@@ -115,7 +115,7 @@ const ButtonIcon = styled.span`
   margin-right: 0.5rem;
 `;
 
-export interface CardStateProps {
+export interface PostStateProps {
   id: string;
   photoUrl: string;
   name: string;
@@ -127,16 +127,16 @@ export interface CardStateProps {
   comments: CommentModel[];
 }
 
-export interface CardDispatchProps {
+export interface PostDispatchProps {
   onPostLike: () => void;
   onCommentLike: (commentId: string) => void;
   onCommentDelete: (commentId: string) => void;
   onCommentEdit: (commentId: string, comment: string) => void;
 }
 
-export type CardProps = CardStateProps & CardDispatchProps;
+export type PostProps = PostStateProps & PostDispatchProps;
 
-export const Card = ({
+export const Post = ({
   id,
   photoUrl,
   name,
@@ -150,7 +150,7 @@ export const Card = ({
   onCommentLike,
   onCommentDelete,
   onCommentEdit,
-}: CardProps) => {
+}: PostProps): JSX.Element => {
   const [displayNewComment, setDisplayNewComment] = useState(false);
 
   useEffect(() => {

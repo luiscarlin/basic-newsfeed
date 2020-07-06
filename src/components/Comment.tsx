@@ -129,7 +129,7 @@ export const Comment = ({
   onLike,
   onDelete,
   editComment,
-}: CommentProps) => {
+}: CommentProps): JSX.Element => {
   const [disabled, setDisabled] = useState(true);
   const [comment, setComment] = useState(message);
 
