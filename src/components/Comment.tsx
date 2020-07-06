@@ -26,8 +26,13 @@ const Content = styled.div`
   border-radius: 10px;
   padding: 1.5rem;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   width: 100%;
+`;
+
+const TopContent = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.p`
@@ -56,7 +61,7 @@ const TimeElapsed = styled.p`
   color: ${colors.placeholderText};
   font-weight: 500;
   line-height: 1.5;
-  flex: 1;
+  flex: 2;
   text-align: right;
 `;
 
@@ -79,17 +84,30 @@ const LeftContent = styled.div`
 
 const CommentActions = styled.div`
   font-size: 1.3rem;
+
+  @media (max-width: 500px) {
+    font-size: 1.1rem;
+  }
+
   color: ${colors.secondaryText};
   font-weight: 700;
   line-height: 1.5;
   padding-top: 0.5rem;
   * {
     margin-right: 1rem;
+    @media (max-width: 500px) {
+      margin-right: 0.5rem;
+    }
   }
 `;
 
 const Button = styled.button`
   font-size: 1.3rem;
+
+  @media (max-width: 500px) {
+    font-size: 1.1rem;
+  }
+
   color: ${colors.secondaryText};
   font-weight: 700;
   line-height: 1.5;
@@ -133,34 +151,36 @@ export const Comment = ({
     <CommentWrapper data-testid="comment">
       <SmallProfilePic src={photoUrl} alt="profile-pic" />
       <Content>
-        <LeftContent>
-          <Name>{name}</Name>
-          <Role>{role}</Role>
-          {disabled ? (
-            <Message>{message}</Message>
-          ) : (
-            <InputBox value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
-          )}
-          <CommentActions>
-            <span>{numberLikes} Likes</span>
-            <span>|</span>
-            <Button onClick={onLike}>
-              <FaHeart />
-              Like
-            </Button>
-            <span>|</span>
-            <Button onClick={onEdit}>
-              <FaPencilAlt />
-              Edit
-            </Button>
-            <span>|</span>
-            <Button onClick={onDelete}>
-              <FaTrash />
-              Delete
-            </Button>
-          </CommentActions>
-        </LeftContent>
-        <TimeElapsed>{`${minutesAgo} minutes ago`}</TimeElapsed>
+        <TopContent>
+          <LeftContent>
+            <Name>{name}</Name>
+            <Role>{role}</Role>
+            {disabled ? (
+              <Message>{message}</Message>
+            ) : (
+              <InputBox value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
+            )}
+          </LeftContent>
+          <TimeElapsed>{`${minutesAgo} minutes ago`}</TimeElapsed>
+        </TopContent>
+        <CommentActions>
+          <span>{numberLikes} Likes</span>
+          <span>|</span>
+          <Button onClick={onLike}>
+            <FaHeart />
+            Like
+          </Button>
+          <span>|</span>
+          <Button onClick={onEdit}>
+            <FaPencilAlt />
+            Edit
+          </Button>
+          <span>|</span>
+          <Button onClick={onDelete}>
+            <FaTrash />
+            Delete
+          </Button>
+        </CommentActions>
       </Content>
     </CommentWrapper>
   );

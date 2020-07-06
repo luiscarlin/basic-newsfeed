@@ -3,7 +3,9 @@ import { colors } from './colors';
 
 export const CardWrapper = styled.div`
   background: ${colors.cardBackground};
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
+  min-width: 350px;
   margin: 1rem;
   border: 1px solid ${colors.border};
   border-radius: 15px;
@@ -15,4 +17,8 @@ export const SmallProfilePic = styled.img`
   width: 5rem;
   border-radius: 50px;
   margin-right: 2rem;
+
+  @media (max-width: 500px) {
+    width: 4rem;
+  }
 `;

@@ -11,6 +11,10 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
 `;
 
 export const App = () => {

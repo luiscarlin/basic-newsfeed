@@ -19,6 +19,10 @@ const ProfilePic = styled.img`
   width: 6.5rem;
   border-radius: 50px;
   margin-right: 2rem;
+
+  @media (max-width: 500px) {
+    width: 5rem;
+  }
 `;
 
 const UserInfoWrapper = styled.div`
