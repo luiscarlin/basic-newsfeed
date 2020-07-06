@@ -16,20 +16,63 @@ const CommentWrapper = styled.div`
   display: flex;
   align-items: center;
   background: ${colors.actionBarBackground};
-  padding: 2rem;
-`;
-
-const ProfilePic = styled.img`
-  width: 5rem;
-  border-radius: 50px;
-  margin-right: 2rem;
+  padding: 1rem 2rem;
 `;
 
 const Content = styled.div`
   background: ${colors.background};
-  border-radius: 15px;
-  padding: 2rem;
+  border-radius: 10px;
+  padding: 1.5rem;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const Name = styled.p`
+  font-size: 1.5rem;
+  color: ${colors.text};
+  font-weight: 700;
+  line-height: 1.5;
+`;
+
+const Role = styled.p`
+  font-size: 1.3rem;
+  color: ${colors.primaryActiveButtonBackground};
+  font-weight: 500;
+  line-height: 1.5;
+`;
+
+const Message = styled.p`
+  font-size: 1.3rem;
+  color: ${colors.text};
+  font-weight: 700;
+  line-height: 1.5;
+`;
+
+const TimeElapsed = styled.p`
+  font-size: 1.4rem;
+  color: ${colors.placeholderText};
+  font-weight: 500;
+  line-height: 1.5;
+  flex: 1;
+  text-align: right;
+`;
+
+const InputBox = styled.input`
+  font-size: 1.3rem;
+  color: ${colors.text};
+  font-weight: 700;
+  line-height: 1.5;
+  background: transparent;
+  width: 100%;
+  border: 2px solid ${colors.border};
+  border-radius: 50px;
+  padding: 0 1rem;
+`;
+
+const LeftContent = styled.div`
+  overflow: hidden;
+  flex: 3;
 `;
 
 export const Comment = ({
@@ -64,13 +107,13 @@ export const Comment = ({
     <CommentWrapper data-testid="comment">
       <SmallProfilePic src={photoUrl} alt="profile-pic" />
       <Content>
-        <div>
-          <div>{name}</div>
-          <div>{role}</div>
+        <LeftContent>
+          <Name>{name}</Name>
+          <Role>{role}</Role>
           {disabled ? (
-            <div>{message}</div>
+            <Message>{message}</Message>
           ) : (
-            <input value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
+            <InputBox value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
           )}
           <div>
             <span>{numberLikes} Likes</span>
@@ -78,8 +121,8 @@ export const Comment = ({
             <button onClick={onEdit}>Edit</button>
             <button onClick={onDelete}>Delete</button>
           </div>
-        </div>
-        <div>{`${minutesAgo} minutes ago`}</div>
+        </LeftContent>
+        <TimeElapsed>{`${minutesAgo} minutes ago`}</TimeElapsed>
       </Content>
     </CommentWrapper>
   );
