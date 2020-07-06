@@ -1,9 +1,10 @@
 import { darken } from 'polished';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import styled from 'styled-components';
+import { NewCommentContainer } from '../containers/NewComment.container';
 import { CommentModel } from '../models/comment.model';
-import { CardContainer } from '../styles/CardStyles';
+import { CardWrapper } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
 import { Comment } from './Comment';
 
@@ -18,9 +19,13 @@ const ProfilePic = styled.img`
   width: 6.5rem;
   border-radius: 50px;
   margin-right: 2rem;
+
+  @media (max-width: 500px) {
+    width: 5rem;
+  }
 `;
 
-const UserInfoContainer = styled.div`
+const UserInfoWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -111,6 +116,7 @@ const ButtonIcon = styled.span`
 `;
 
 export interface CardStateProps {
+  id: string;
   photoUrl: string;
   name: string;
   location: string;
@@ -124,11 +130,14 @@ export interface CardStateProps {
 export interface CardDispatchProps {
   onPostLike: () => void;
   onCommentLike: (commentId: string) => void;
+  onCommentDelete: (commentId: string) => void;
+  onCommentEdit: (commentId: string, comment: string) => void;
 }
 
 export type CardProps = CardStateProps & CardDispatchProps;
 
 export const Card = ({
+  id,
   photoUrl,
   name,
   location,
@@ -139,11 +148,19 @@ export const Card = ({
   comments,
   onPostLike,
   onCommentLike,
+  onCommentDelete,
+  onCommentEdit,
 }: CardProps) => {
+  const [displayNewComment, setDisplayNewComment] = useState(false);
+
+  useEffect(() => {
+    setDisplayNewComment(false);
+  }, [id]);
+
   return (
-    <CardContainer>
+    <CardWrapper>
       <CardHeader>
-        <UserInfoContainer>
+        <UserInfoWrapper>
           <ProfilePic data-testid={'card-profile-pic'} src={photoUrl} alt="profile-pic" />
           <div>
             <Name>{name}</Name>
@@ -157,7 +174,7 @@ export const Card = ({
               minutesAgo === 1 ? 'minute' : 'minutes'
             } ago`}</ElapsedTime>
           </div>
-        </UserInfoContainer>
+        </UserInfoWrapper>
         <div data-testid="card-ellipsis-icon">
           <EllipsisIcon>
             <FaEllipsisH />
@@ -181,16 +198,23 @@ export const Card = ({
           </ButtonIcon>
           Like
         </LeftButton>
-        <Button>
+        <Button onClick={() => setDisplayNewComment(!displayNewComment)}>
           <ButtonIcon>
             <FaCommentDots />
           </ButtonIcon>
           Comment
         </Button>
       </CtaBar>
+      {displayNewComment && <NewCommentContainer postId={id} onCommentEntered={() => setDisplayNewComment(false)} />}
       {comments.map((comment, index) => (
-        <Comment key={index} {...comment} onLike={() => onCommentLike(comment.id)} />
+        <Comment
+          key={index}
+          {...comment}
+          onLike={() => onCommentLike(comment.id)}
+          onDelete={() => onCommentDelete(comment.id)}
+          editComment={(text) => onCommentEdit(comment.id, text)}
+        />
       ))}
-    </CardContainer>
+    </CardWrapper>
   );
 };

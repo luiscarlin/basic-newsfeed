@@ -3,7 +3,7 @@ import { darken } from 'polished';
 import React, { useEffect, useRef, useState } from 'react';
 import { FaPhotoVideo } from 'react-icons/fa';
 import styled from 'styled-components';
-import { CardContainer } from '../styles/CardStyles';
+import { CardWrapper, SmallProfilePic } from '../styles/CardStyles';
 import { colors } from '../styles/colors';
 
 const InputBox = styled.textarea`
@@ -21,9 +21,7 @@ const InputBox = styled.textarea`
   }
 `;
 
-const ProfilePic = styled.img`
-  width: 5rem;
-  border-radius: 50px;
+const ProfilePic = styled(SmallProfilePic)`
   margin: 2rem;
 `;
 
@@ -58,7 +56,7 @@ const PostItButton = styled.button<PostItButtonProps>`
   }
 `;
 
-const TopContainer = styled.div`
+const TopWrapper = styled.div`
   width: 100%;
   display: flex;
 `;
@@ -73,7 +71,7 @@ const CtaBar = styled.div`
   border-top: 1px solid ${colors.border};
 `;
 
-const IconContainer = styled.span`
+const IconWrapper = styled.span`
   margin-right: 0.5rem;
 `;
 
@@ -103,8 +101,8 @@ export const NewPostCard = ({ onPost, photoUrl }: NewPostCardProps) => {
   };
 
   return (
-    <CardContainer>
-      <TopContainer>
+    <CardWrapper>
+      <TopWrapper>
         <div>
           <ProfilePic src={photoUrl} alt="profile-pic" />
         </div>
@@ -115,18 +113,18 @@ export const NewPostCard = ({ onPost, photoUrl }: NewPostCardProps) => {
           value={text}
           onChange={(event) => setText(event.target.value)}
         />
-      </TopContainer>
+      </TopWrapper>
       <CtaBar>
         <PhotoButton>
-          <IconContainer>
+          <IconWrapper>
             <FaPhotoVideo />
-          </IconContainer>
+          </IconWrapper>
           Photo/Video
         </PhotoButton>
         <PostItButton disabled={text === ''} onClick={onPostClicked}>
           Post It
         </PostItButton>
       </CtaBar>
-    </CardContainer>
+    </CardWrapper>
   );
 };
