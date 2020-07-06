@@ -5,11 +5,11 @@ import { NewPostCardContainer } from './containers/NewPostCard.container';
 import { colors } from './styles/colors';
 
 const Main = styled.main`
+  padding: 5rem;
   background: ${colors.background};
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 `;
 

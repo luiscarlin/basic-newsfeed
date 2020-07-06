@@ -14,7 +14,6 @@ export const rootReducer: (state: AppState | undefined, action: any) => AppState
       return {
         ...state,
         posts: [
-          ...state.posts,
           {
             id: uuidv4(),
             photoUrl,
@@ -26,6 +25,7 @@ export const rootReducer: (state: AppState | undefined, action: any) => AppState
             numberComments: 0,
             comments: [],
           } as Post,
+          ...state.posts,
         ],
       };
     case ADD_POST_LIKE:

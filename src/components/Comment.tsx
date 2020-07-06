@@ -3,15 +3,6 @@ import styled from 'styled-components';
 import { CommentModel } from '../models/comment.model';
 import { colors } from '../styles/colors';
 
-// export interface CommentStateProps {
-//   photoUrl: string;
-//   minutesAgo: number;
-//   name: string;
-//   role: string;
-//   message: string;
-//   numberLikes: number;
-// }
-
 export interface CommentDispatchProps {
   onLike: () => void;
   onDelete: () => void;
@@ -61,6 +52,13 @@ export const Comment = ({
     }
   };
 
+  const onEdit = () => {
+    if (disabled) {
+      setComment(message);
+    }
+    setDisabled(false);
+  };
+
   return (
     <CommentContainer data-testid="comment">
       <ProfilePic src={photoUrl} alt="profile-pic" />
@@ -69,14 +67,14 @@ export const Comment = ({
           <div>{name}</div>
           <div>{role}</div>
           {disabled ? (
-            <div>{comment}</div>
+            <div>{message}</div>
           ) : (
             <input value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
           )}
           <div>
             <span>{numberLikes} Likes</span>
             <button onClick={onLike}>Like</button>
-            <button onClick={() => setDisabled(false)}>Edit</button>
+            <button onClick={onEdit}>Edit</button>
             <button onClick={onDelete}>Delete</button>
           </div>
         </div>
