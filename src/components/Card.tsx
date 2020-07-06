@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCircle, FaCommentDots, FaEllipsisH, FaHeart, FaMapMarkerAlt } from 'react-icons/fa';
 import styled from 'styled-components';
 import { NewCommentContainer } from '../containers/NewComment.container';
@@ -148,6 +148,10 @@ export const Card = ({
   onCommentEdit,
 }: CardProps) => {
   const [displayNewComment, setDisplayNewComment] = useState(false);
+
+  useEffect(() => {
+    setDisplayNewComment(false);
+  }, [id]);
 
   return (
     <CardContainer>
