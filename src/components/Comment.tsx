@@ -1,4 +1,6 @@
+import { darken } from 'polished';
 import React, { useState } from 'react';
+import { FaHeart, FaPencilAlt, FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
 import { CommentModel } from '../models/comment.model';
 import { SmallProfilePic } from '../styles/CardStyles';
@@ -75,6 +77,30 @@ const LeftContent = styled.div`
   flex: 3;
 `;
 
+const CommentActions = styled.div`
+  font-size: 1.3rem;
+  color: ${colors.secondaryText};
+  font-weight: 700;
+  line-height: 1.5;
+  padding-top: 0.5rem;
+  * {
+    margin-right: 1rem;
+  }
+`;
+
+const Button = styled.button`
+  font-size: 1.3rem;
+  color: ${colors.secondaryText};
+  font-weight: 700;
+  line-height: 1.5;
+  padding: 0;
+  background: transparent;
+  border: none;
+  :hover {
+    color: ${darken(0.2, colors.secondaryText)};
+  }
+`;
+
 export const Comment = ({
   photoUrl,
   minutesAgo,
@@ -115,12 +141,24 @@ export const Comment = ({
           ) : (
             <InputBox value={comment} onChange={(e) => setComment(e.target.value)} onKeyDown={handleKeyDown} />
           )}
-          <div>
+          <CommentActions>
             <span>{numberLikes} Likes</span>
-            <button onClick={onLike}>Like</button>
-            <button onClick={onEdit}>Edit</button>
-            <button onClick={onDelete}>Delete</button>
-          </div>
+            <span>|</span>
+            <Button onClick={onLike}>
+              <FaHeart />
+              Like
+            </Button>
+            <span>|</span>
+            <Button onClick={onEdit}>
+              <FaPencilAlt />
+              Edit
+            </Button>
+            <span>|</span>
+            <Button onClick={onDelete}>
+              <FaTrash />
+              Delete
+            </Button>
+          </CommentActions>
         </LeftContent>
         <TimeElapsed>{`${minutesAgo} minutes ago`}</TimeElapsed>
       </Content>
