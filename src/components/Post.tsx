@@ -150,7 +150,7 @@ export const Post = ({
   onCommentLike,
   onCommentDelete,
   onCommentEdit,
-}: PostProps) => {
+}: PostProps): JSX.Element => {
   const [displayNewComment, setDisplayNewComment] = useState(false);
 
   useEffect(() => {

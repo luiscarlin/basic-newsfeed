@@ -85,7 +85,7 @@ export interface NewPostDispatchProps {
 
 export type NewPostdProps = NewPostStateProps & NewPostDispatchProps;
 
-export const NewPost = ({ onPost, photoUrl }: NewPostdProps) => {
+export const NewPost = ({ onPost, photoUrl }: NewPostdProps): JSX.Element => {
   const textareaRef = useRef(null);
 
   useEffect(() => {

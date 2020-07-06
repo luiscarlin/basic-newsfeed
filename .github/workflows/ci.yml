@@ -15,5 +15,3 @@ jobs:
         run: yarn tsc
       - name: Run linter
         run: yarn lint:check
-      - name: Run tests
-        run: yarn test --coverage

@@ -1,11 +1,12 @@
+import { AnyAction } from 'redux';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_COMMENT, DELETE_COMMENT, EDIT_COMMENT, LIKE_COMMENT } from '../actions/comment.action';
 import { ADD_POST, LIKE_POST } from '../actions/posts.action';
 import { AppState, DEFAULT_APP_STATE } from '../store/AppState';
 
-export const rootReducer: (state: AppState | undefined, action: any) => AppState = (
+export const rootReducer: (state: AppState | undefined, action: AnyAction) => AppState = (
   state: AppState = DEFAULT_APP_STATE,
-  action: any,
+  action: AnyAction,
 ) => {
   switch (action.type) {
     case ADD_POST:

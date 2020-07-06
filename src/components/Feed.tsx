@@ -6,7 +6,7 @@ export interface FeedProps {
   posts: Post[];
 }
 
-export const Feed = ({ posts }: FeedProps) => {
+export const Feed = ({ posts }: FeedProps): JSX.Element => {
   return (
     <>
       {posts.map((post, index) => (

@@ -17,7 +17,7 @@ const Main = styled.main`
   }
 `;
 
-export const App = () => {
+export const App = (): JSX.Element => {
   return (
     <Main>
       <NewPostContainer />
